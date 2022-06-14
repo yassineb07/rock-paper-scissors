@@ -1,0 +1,81 @@
+<script>
+  function computerPlay(){
+    return Math.floor(Math.random() * 3);
+  }
+
+
+  function playerselect(){
+
+    let player = prompt('Enter choice: ');
+    player = player.toLowerCase();
+
+    switch (player){
+      case 'rock':
+        return 0;
+      case 'paper':
+        return 1;
+      case 'scissors':
+        return 2;
+    };
+  };
+
+  function round(){
+
+    let com = computerPlay();
+    let hum = playerselect();
+
+    if (com === hum) {
+      console.log('Tie Game')
+      return 'tie'
+    };
+    switch (hum){
+      case 0:
+        if (com === 1) {
+          console.log('You Lose! Paper beats Rock')
+          return 'lose'
+        } else {
+          console.log('You Win! Rock beats Scissors')
+          return 'win'
+        };
+        break;
+      
+      case 1:
+        if (com === 2) {
+          console.log('You Lose! Scissors beats Paper')
+          return 'lose'
+        } else {
+          console.log('You Win! Paper beats Rock')
+          return 'win'
+        };
+        break;
+      
+      case 2:
+        if (com === 0) {
+          console.log('You Lose! Rock beats Scissors')
+          return 'lose'
+        } else {
+          console.log('You Win! Scissors beats Paper')
+          return 'win'
+        };
+        break;
+    };
+  };
+
+  function game(){
+
+    let player = 0;
+    let computer = 0;
+
+    for(let i =0 ; i < 5 ; i++) {
+      g = round()
+      if (g === 'win') {player++}
+      if (g === 'lose') {computer++}
+    };
+
+    if (player > computer){return 'You Won The Game'}
+    else if (player < computer) {return 'You Lost The Game'}
+    else {return 'It\'s a Tie Game'};
+  }
+  
+  console.log(game())
+</script>
