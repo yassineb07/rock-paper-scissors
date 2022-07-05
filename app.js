@@ -21,31 +21,51 @@ function computerSelect(){
 
 function playRound(playerSelection){
   computerSelection = computerSelect();
-  console.log('player : '+playerSelection)
-  console.log('computer : '+computerSelection)
   switch(playerSelection+' vs '+computerSelection){
     case 'rock vs scissors':
     case 'paper vs rock':
     case 'scissors vs paper':
-      console.log('YOU WIN');
       playerScore++;
       pScore.textContent = `${playerScore}`;
-      comment.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+      if (playerScore < 5){
+        comment.textContent = `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`;
+      } else if (playerScore === 5) {
+        comment.textContent = 'Game Over, You Win! Refresh to Play Again';
+        gameOver()
+      };
       break;
     case 'rock vs paper':
     case 'paper vs scissors':
     case 'scissors vs rock':
-      console.log('YOU LOSE');
       computerScore++;
       cScore.textContent = `${computerScore}`;
-      comment.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+      if (computerScore < 5){
+        comment.textContent = `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}`;
+      } else if (computerScore === 5) {
+        comment.textContent = 'Game Over, You Lose! Refresh to Play Again';
+        gameOver();
+      };
       break;
     default:
-      console.log('Tie');
       comment.textContent = 'It\'s a Tie';
   }
 }
 
+function gameOver(){
+  rock.disabled = true;
+  paper.disabled = true;
+  scissors.disabled = true;
+}
+ function restartGame(){
+  playerScore = 0;
+  computerScore = 0;
+  pScore.textContent = playerScore;
+  cScore.textContent = computerScore;
+  comment.textContent = '';
+  rock.disabled = false;
+  paper.disabled = false;
+  scissors.disabled = false;
+ }
 
 rock.addEventListener('click',function(){
   playRound('rock')
